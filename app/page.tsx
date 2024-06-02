@@ -13,10 +13,10 @@ import { useUser } from '@clerk/nextjs'
 
 export default function Home() {
   const { isLoaded, isSignedIn, user } = useUser()
-  console.log(user?.publicMetadata?.role)
+
   const router = useRouter();
   useEffect(() => {
-    if (user?.publicMetadata?.role !== "admin") {
+    if (isSignedIn && user?.publicMetadata?.role !== "admin") {
       router.push("./unauthorize");
     }
   }, []);
