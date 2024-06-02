@@ -7,16 +7,18 @@ import {
     UserButton
   } from '@clerk/nextjs';
   import { useRouter } from "next/navigation";
-  import { checkRole } from "../../utils/roles";
+  import { useUser } from '@clerk/nextjs'
 
 const page = () => {
+  const { isLoaded, isSignedIn, user } = useUser()
+  console.log(user)
   const router = useRouter();
   const handleClick = () => {
     router.push("https://ectore.vercel.app");
   }
   
   useEffect(() => {
-    if (!checkRole("admin")) {
+    if (!isSignedIn) {
       router.push("./");
     }
   }, []);

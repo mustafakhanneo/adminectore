@@ -8,14 +8,15 @@ import {
 } from '@clerk/nextjs';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { checkRole } from "../utils/roles";
+import { useUser } from '@clerk/nextjs'
 
 
 export default function Home() {
-
+  const { isLoaded, isSignedIn, user } = useUser()
+  console.log(user)
   const router = useRouter();
   useEffect(() => {
-    if (!checkRole("admin")) {
+    if (!isSignedIn) {
       router.push("./unauthorize");
     }
   }, []);
