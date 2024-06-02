@@ -11,14 +11,14 @@ import {
 
 const page = () => {
   const { isLoaded, isSignedIn, user } = useUser()
-  console.log(user)
+  console.log(user?.publicMetadata?.role)
   const router = useRouter();
   const handleClick = () => {
     router.push("https://ectore.vercel.app");
   }
   
   useEffect(() => {
-    if (!isSignedIn) {
+    if (user?.publicMetadata?.role === "admin") {
       router.push("./");
     }
   }, []);
