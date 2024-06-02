@@ -8,15 +8,14 @@ import {
 } from '@clerk/nextjs';
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { auth } from "@clerk/nextjs/server";
+import { checkRole } from "../utils/roles";
 
 
 export default function Home() {
-  const { sessionClaims } = auth();
 
   const router = useRouter();
   useEffect(() => {
-    if (sessionClaims?.metadata.role !== "admin") {
+    if (!checkRole("admin")) {
       router.push("./unauthorize");
     }
   }, []);
