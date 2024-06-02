@@ -5,8 +5,14 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs';
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  const handleSignIn = () => {
+    router.push("./sign-in");
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -35,7 +41,7 @@ export default function Home() {
       </div>
 
       <SignedOut>
-          <SignInButton />
+        <Button onClick={handleSignIn}>SignIn</Button>
         </SignedOut>
         <SignedIn>
           <UserButton />
